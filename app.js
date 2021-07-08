@@ -19,12 +19,14 @@ class Book {
 
 let myLibrary = [];
 
-function addToLibrary (newbook) {
+function addToLibrary(newbook) {
   myLibrary.push(newbook);
+  saveLocal();
 }
 
-const removeFromLibrary = (bookTitle) =>{
-  myLibrary = myLibrary.filter((book) => book.title !== bookTitle);
+const removeFromLibrary = (bookTitle) => {
+  myLibrary = myLibrary.filter((book) => book.title != bookTitle);
+  saveLocal();
 }
 
 // Popup
@@ -72,13 +74,27 @@ const getFromInput = () => {
 
 const bookGrid = document.querySelector(".shelf")
 
-function editBooks (e) {
+function editBooks(e) {
   if (e.target.classList.contains("remove-btn")) {
-    removeFromLibrary(e.target.parentNode.firstChild.innerHTML);
+    removeFromLibrary(e.target.parentNode.firstChild.textContent);
     e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+  } else if (e.target.classList.contains("is-read-btn")) {
+    if (e.target.textContent === "Read") {
+      e.target.textContent = "Not Read";
+      e.target.classList.add("btn-red");
+      e.target.classList.remove("btn-green");
+      saveLocal();
+
+    } else {
+      e.target.textContent = "Read";
+      e.target.classList.remove("btn-red");
+      e.target.classList.add("btn-green");
+      saveLocal();
+    }
   }
-  
 }
+
+
 
 const updateGrid = () => {
   resetGrid();
@@ -104,10 +120,10 @@ const createBook = (book) => {
   author.classList.add("book-grid-book-text");
   pages.classList.add("book-grid-book-text");
   readButton.classList.add("button", "is-read-btn");
-  removeButton.classList.add("remove-btn");
+  removeButton.classList.add("remove-btn", "button", "btn-red");
 
-  title.innerHTML = `<i class="fas fa-book-open"></i> ${book.title}`;
-  author.innerHTML = `<i class="far fa-user"></i> ${book.author}`;
+  title.innerHTML = book.title;
+  author.innerHTML = book.author;
   pages.textContent = `${book.pages} pages`
   removeButton.textContent = "Remove";
   if (book.isRead) {
@@ -115,7 +131,7 @@ const createBook = (book) => {
     readButton.classList.add("btn-green");
   } else {
     readButton.textContent = "Not Read";
-    readButton.classList.add("btn.red")
+    readButton.classList.add("btn-red");
   }
 
   bookCard.appendChild(title);
@@ -132,3 +148,16 @@ newBookbtn.addEventListener("click", openPopup);
 overlay.addEventListener("click", closePopup);
 form.addEventListener("submit", addBook);
 bookGrid.addEventListener("click", editBooks);
+
+// LOCAL STORAGE 
+function saveLocal() {
+  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+}
+
+function restoreLocal() {
+  myLibrary = JSON.parse(localStorage.getItem("myLibrary"));
+  if (myLibrary === null) myLibrary = [];
+  updateGrid();
+}
+
+restoreLocal();

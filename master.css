@@ -6,7 +6,64 @@ html {
 
 body {
   font-family: 'Roboto', sans-serif;
+  background-color: #6157489f;
   font-size: 3rem;
+}
+
+header {
+  background-color: #EAE7DC;
+  border-bottom: 5px solid #D8C3A5;
+  text-align: center;
+  padding: 40px;
+}
+
+ header h1 {
+  font-size: 7rem;
+  color: #E85A4F;
+}
+
+.new-book-btn{
+  font-size: 3rem;
+  border: 2px solid #8E8D8A;
+  border-radius: 12px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.new-book-btn span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.new-book-btn span:after {
+  content: '+';
+  position: absolute;
+  opacity: 0;
+  top: 1px;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.new-book-btn:hover span {
+  padding-right: 30px;
+}
+
+.new-book-btn:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+/* BUTTONS */
+
+.btn-green{
+  background-color: rgba(70, 177, 70, 0.645);
+  color: white;
+}
+
+.btn-red{
+  background-color: #E85A4F;
 }
 
 .main {
@@ -14,25 +71,6 @@ body {
   padding: 2rem;
   margin: 0 auto;
   text-align: center;
-}
-
-.shelf {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 2rem;
-  padding: 2rem;
-}
-
-.book-grid-book-card {
-  padding-top: 2rem;
-  border: 2px solid #666;
-  border-radius: 5px;
-  background-color: #e0e2e7;
-  text-align: center;
-}
-
-.book-grid-book-text {
-  padding: 0.5rem;
 }
 
 /* Popup */
@@ -43,7 +81,7 @@ body {
   left: 50%;
   padding: 3rem;
   border: 5px solid #263238;
-  background-color: #78909c;
+  background-color: #EAE7DC;
   border-radius: 20px;
   transform: translate(-50%, -50%) scale(0);
   transition: 200ms ease-in-out;
@@ -62,7 +100,10 @@ body {
 }
 
 .popup-title{
-  font-size: 4rem;
+  font-size: 2.8rem;
+  color: #263238;
+  margin-bottom: 10px;
+
 }
 
 .popup-overlay {
@@ -82,12 +123,15 @@ body {
 
 .popup-input {
   width: 80%;
+  height: 30px;
   padding: 10px ;
-  margin: 10px;
+  margin: 15px;
   border-radius: 12px;
   border: 2px solid #263238;
   font-weight: bold;
-  background-color: lightgrey;
+  background-color: #D8C3A5;
+  font-size: 2rem;
+  
 }
 
 .popup-input:focus {
@@ -100,10 +144,75 @@ body {
   width: 47%;
   padding: 1rem;
   margin: 2rem;
+  color: #263238;
+
 }
 
 .popup-checkbox {
   width: 2rem;
   height: 2rem;
-  margin-top: 1.4rem;
+  margin-top: 0.6rem;
 }
+
+.popup-submit{
+  font-size: 3rem;
+  border: 2px solid #8E8D8A;
+  border-radius: 12px;
+  padding: 10px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.popup-submit:hover {opacity: 1}
+
+
+/* Book Grid */
+  /* readButton.classList.add("button", "is-read-btn");
+  removeButton.classList.add("remove-btn", "button", "red-btn"); */ */
+
+  .shelf {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 2rem;
+    padding: 2rem;
+  }
+  
+  .book-grid-book-card {
+    padding: 2rem;
+    border: 10px solid #666;
+    border-radius: 5px;
+    background-color: #EAE7DC;
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .book-grid-book-text {
+    padding: 0.5rem;
+    font-size: 2.5rem;
+    margin: 10px;
+  }
+
+  .remove-btn{
+    font-size: 2.5rem;
+    border: 2px solid #8E8D8A;
+    border-radius: 12px;
+    padding: 10px;
+    cursor: pointer;
+    opacity: 0.8;
+    margin: 10px;
+  }
+
+  .remove-btn:hover {opacity: 1}
+  
+  .is-read-btn{
+    font-size: 2.5rem;
+    border: 2px solid #8E8D8A;
+    border-radius: 12px;
+    padding: 10px;
+    cursor: pointer;
+    opacity: 0.8;
+    margin: 10px;
+  }
+
+  .is-read-btn:hover {opacity: 1}
+  
