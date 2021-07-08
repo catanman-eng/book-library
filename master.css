@@ -2,11 +2,13 @@
 html {
   font-size: 62.5%;
   line-height: 1.6;
+    background-color: #6157489f;
+
 }
 
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: #6157489f;
+  /* background-color: #6157489f; */
   font-size: 3rem;
 }
 
