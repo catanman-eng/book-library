@@ -16,6 +16,25 @@ body {
   text-align: center;
 }
 
+.shelf {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2rem;
+  padding: 2rem;
+}
+
+.book-grid-book-card {
+  padding-top: 2rem;
+  border: 2px solid #666;
+  border-radius: 5px;
+  background-color: #e0e2e7;
+  text-align: center;
+}
+
+.book-grid-book-text {
+  padding: 0.5rem;
+}
+
 /* Popup */
 
 .popup {

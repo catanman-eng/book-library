@@ -19,10 +19,13 @@ class Book {
 
 let myLibrary = [];
 
-const addToLibrary = ((newBook) => {
-  myLibrary.push(newBook);
-  // saveLocal();
-})
+function addToLibrary (newbook) {
+  myLibrary.push(newbook);
+}
+
+const removeFromLibrary = (bookTitle) =>{
+  myLibrary = myLibrary.filter((book) => book.title !== bookTitle);
+}
 
 // Popup
 const newBookbtn = document.querySelector(".new-book-btn");
@@ -51,7 +54,7 @@ const form = document.querySelector(".popup-form")
 
 const addBook = (e) => {
   e.preventDefault();
-  addToLibrary(getFromInput);
+  addToLibrary(getFromInput());
   updateGrid();
   closePopup();
 }
@@ -69,9 +72,16 @@ const getFromInput = () => {
 
 const bookGrid = document.querySelector(".shelf")
 
+function editBooks (e) {
+  if (e.target.classList.contains("remove-btn")) {
+    removeFromLibrary(e.target.parentNode.firstChild.innerHTML);
+    e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+  }
+  
+}
 
 const updateGrid = () => {
-  // resetGrid();
+  resetGrid();
   for (let element of myLibrary) {
     createBook(element);
   }
@@ -94,10 +104,10 @@ const createBook = (book) => {
   author.classList.add("book-grid-book-text");
   pages.classList.add("book-grid-book-text");
   readButton.classList.add("button", "is-read-btn");
-  removeButton.classList.add("button", "btn-red", "remove-btn");
+  removeButton.classList.add("remove-btn");
 
-  title.textContent = book.title;
-  author.textContent = book.author;
+  title.innerHTML = `<i class="fas fa-book-open"></i> ${book.title}`;
+  author.innerHTML = `<i class="far fa-user"></i> ${book.author}`;
   pages.textContent = `${book.pages} pages`
   removeButton.textContent = "Remove";
   if (book.isRead) {
@@ -120,4 +130,5 @@ const createBook = (book) => {
 //EVENT LISTENERS
 newBookbtn.addEventListener("click", openPopup);
 overlay.addEventListener("click", closePopup);
-form.addEventListener("submit", addBook)
+form.addEventListener("submit", addBook);
+bookGrid.addEventListener("click", editBooks);
